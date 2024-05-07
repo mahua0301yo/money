@@ -1,6 +1,6 @@
 # 載入必要模組
 import os
-os.chdir(r'C:/Users/Student/Downloads')
+#os.chdir(r'C:/Users/Student/Downloads')
 #import haohaninfo
 #from order_Lo8 import Record
 import numpy as np
