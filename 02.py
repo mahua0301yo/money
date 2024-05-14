@@ -128,8 +128,6 @@ else:
 
 KBar = indicator_forKBar_short.KBar(Date, cycle_duration)
 
-
-
 for i in range(KBar_dic['time'].size):
     
     #time = datetime.datetime.strptime(KBar_dic['time'][i],'%Y%m%d%H%M%S%f')
