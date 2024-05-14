@@ -110,18 +110,24 @@ KBar_dic['amount']=np.array(KBar_amount_list)
 # Close_array = np.array([])
 # Volume_array = np.array([])
 
+import streamlit as st
+from datetime import timedelta
+
 Date = start_date.strftime("%Y-%m-%d")
 
-st.subheader("設定一根 K 棒的時間長度(分鐘)")
-cycle_duration = st.number_input('輸入一根 K 棒的時間長度(單位:分鐘, 一日=1440分鐘)',value = 1440, key="KBar_duration")
-cycle_duration = int(cycle_duration)
-#cycle_duration = 1440   ## 可以改成你想要的 KBar 週期
-#KBar = indicator_f_Lo2.KBar(Date,'time',2)
-KBar = indicator_forKBar_short.KBar(Date,cycle_duration)    ## 設定cycle_duration可以改成你想要的 KBar 週期
+st.subheader("設定一根 K 棒的時間長度")
+time_unit = st.selectbox('選擇時間單位', ['天', '小時'])
+if time_unit == '天':
+    cycle_duration = st.number_input('輸入一根 K 棒的時間長度(單位: 天)', value=1, key="KBar_duration")
+    cycle_duration = int(cycle_duration)
+    cycle_duration = timedelta(days=cycle_duration)
+else:
+    cycle_duration = st.number_input('輸入一根 K 棒的時間長度(單位: 小時)', value=1, key="KBar_duration")
+    cycle_duration = int(cycle_duration)
+    cycle_duration = timedelta(hours=cycle_duration)
 
-#KBar_dic['amount'].shape   ##(5585,)
-#KBar_dic['amount'].size    ##5585
-#KBar_dic['time'].size    ##5585
+KBar = indicator_forKBar_short.KBar(Date, cycle_duration)
+
 
 for i in range(KBar_dic['time'].size):
     
